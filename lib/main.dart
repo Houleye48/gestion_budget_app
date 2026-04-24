@@ -20,11 +20,61 @@ class BudgetApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: const StatsPage(),
+      
+      home: const MainNavigation(),
     );
   }
 }
 
+// --- NOUVELLE CLASSE POUR LA NAVIGATION (22031) ---
+class MainNavigation extends StatefulWidget {
+  const MainNavigation({super.key});
+
+  @override
+  State<MainNavigation> createState() => _MainNavigationState();
+}
+
+class _MainNavigationState extends State<MainNavigation> {
+  int _currentIndex = 0;
+
+  // Liste des pages qui inclut le travail de 23091 et le 22031
+  final List<Widget> _pages = [
+    const StatsPage(),        // Page de 23091
+    const TransactionPage(),  //  page 22031
+    const ProfilePage(),      //  profil 22031
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.teal,
+        onTap: (index) => setState(() => _currentIndex = index),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: 'Stats'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Transactions'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+        ],
+      ),
+      //  BOUTON POUR AJOUTER (22031)
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddTransactionPage()),
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+// --- LA PAGE DE 23091 (GARDÉE TELLE QUELLE) ---
 class StatsPage extends StatelessWidget {
   const StatsPage({super.key});
 
@@ -42,7 +92,6 @@ class StatsPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // Carte du Solde Total
               Card(
                 elevation: 4,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -63,7 +112,6 @@ class StatsPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              // Emplacement pour le futur graphique
               const Text("Répartition des dépenses", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 100),
               const Icon(Icons.pie_chart, size: 100, color: Colors.grey),
