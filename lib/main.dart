@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'screens/home_page.dart';
+import 'screens/add_transaction.dart';
+import 'screens/transaction_page.dart'; 
+import 'screens/profile_page.dart';
 
 void main() {
   runApp(const BudgetApp());
