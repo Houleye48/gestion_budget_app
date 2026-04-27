@@ -32,10 +32,19 @@ class ProfilePage extends StatelessWidget {
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.logout, color: Colors.red),
-              title: const Text("Déconnexion", style: TextStyle(color: Colors.red)),
-              onTap: () {},
-            ),
+  leading: const Icon(Icons.logout, color: Colors.red),
+  title: const Text(
+    "Déconnexion",
+    style: TextStyle(color: Colors.red),
+  ),
+  onTap: () {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/login',
+      (route) => false,
+    );
+  },
+),
           ],
         ),
       ),
