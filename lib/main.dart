@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/stats_page.dart';
 
 void main() {
   runApp(const BudgetApp());
@@ -10,13 +11,9 @@ class BudgetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gestion Budget',
+      title: 'Gestion de Budget',
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(
-        body: Center(
-          child: Text("Backend Ready"),
-        ),
-      ),
+      home: const StatsPage(), // page normale
     );
   }
 }
